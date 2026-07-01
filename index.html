@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pousada Canto dos Mares · Abrindo o WhatsApp…</title>
-<!-- =========================================================================
+<!-- ========================================h=================================
   PAGINA-PONTE GCLID -> WHATSAPP  ·  Pousada Canto dos Mares  (com identidade visual)
   Funcao: capturar o GCLID do clique no anuncio e embuti-lo na mensagem do WhatsApp,
   para a Kommo ler e devolver a conversao ao Google Ads.
@@ -40,8 +40,7 @@
 </style>
 <script>
   var WHATSAPP_NUMERO = "5513997390329";
-  var MENSAGEM_BASE   = "Ola! Vim pelo Google e quero reservar na Pousada Canto dos Mares.";
-
+var MENSAGEM_BASE   = "Olá! Vim pelo Google e quero reservar na Pousada Canto dos Mares. 🌊";
   function getParam(p){
     var m = new RegExp('[?&]' + p + '=([^&]*)').exec(window.location.search);
     return m && decodeURIComponent(m[1].replace(/\+/g,' '));
@@ -50,8 +49,7 @@
     var gclid = getParam('gclid') || getParam('wbraid') || getParam('gbraid');
     try{ if(gclid){localStorage.setItem('cdm_gclid',gclid);} else {gclid=localStorage.getItem('cdm_gclid');} }catch(e){}
     var texto = MENSAGEM_BASE;
-    if(gclid){ texto += " [ref:" + gclid + "]"; }
-    var url = "https://api.whatsapp.com/send?phone=" + WHATSAPP_NUMERO + "&text=" + encodeURIComponent(texto);
+if(gclid){ texto += "\n\n· · ·\n[ref:" + gclid + "]"; }    var url = "https://api.whatsapp.com/send?phone=" + WHATSAPP_NUMERO + "&text=" + encodeURIComponent(texto);
     // pequeno atraso so para o usuario perceber a marca; ajuste/remova se quiser instantaneo
     setTimeout(function(){ window.location.replace(url); }, 900);
     document.addEventListener('DOMContentLoaded',function(){
