@@ -38,9 +38,18 @@
   @keyframes spin{to{transform:rotate(360deg);}}
   @keyframes rise{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 </style>
+  <!-- Google tag (gtag.js) — Canto dos Mares -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-778726654"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-778726654');
+</script>
+<script>
 <script>
   var WHATSAPP_NUMERO = "5513997390329";
-var MENSAGEM_BASE   = "Olá! Vim pelo Google e quero reservar na Pousada Canto dos Mares. 🌊";
+  var MENSAGEM_BASE   = "Olá! Vim pelo Google e quero reservar na Pousada Canto dos Mares. 🌊";
   function getParam(p){
     var m = new RegExp('[?&]' + p + '=([^&]*)').exec(window.location.search);
     return m && decodeURIComponent(m[1].replace(/\+/g,' '));
@@ -49,13 +58,23 @@ var MENSAGEM_BASE   = "Olá! Vim pelo Google e quero reservar na Pousada Canto d
     var gclid = getParam('gclid') || getParam('wbraid') || getParam('gbraid');
     try{ if(gclid){localStorage.setItem('cdm_gclid',gclid);} else {gclid=localStorage.getItem('cdm_gclid');} }catch(e){}
     var texto = MENSAGEM_BASE;
-if(gclid){ texto += "\n\n· · ·\n[ref:" + gclid + "]"; }    var url = "https://api.whatsapp.com/send?phone=" + WHATSAPP_NUMERO + "&text=" + encodeURIComponent(texto);
-    // pequeno atraso so para o usuario perceber a marca; ajuste/remova se quiser instantaneo
-    setTimeout(function(){ window.location.replace(url); }, 900);
+    if(gclid){ texto += "\n\n· · ·\n[ref:" + gclid + "]"; }
+    var url = "https://api.whatsapp.com/send?phone=" + WHATSAPP_NUMERO + "&text=" + encodeURIComponent(texto);
+
+    // Dispara a conversão uma vez por sessão, junto com o redirecionamento automático
+    var jaDisparou = false;
+    try{ jaDisparou = sessionStorage.getItem('cdm_conv_disparada') === '1'; }catch(e){}
+    if(!jaDisparou && typeof gtag === 'function'){
+      gtag('event', 'conversion', {'send_to': 'AW-778726654/J35ECKbu5rwcEP7ZqfMC'});
+      try{ sessionStorage.setItem('cdm_conv_disparada','1'); }catch(e){}
+    }
+
+    setTimeout(function(){ window.location.replace(url); }, 800);
     document.addEventListener('DOMContentLoaded',function(){
       var a=document.getElementById('manual'); if(a){a.href=url;}
     });
   })();
+</script>
 </script>
 </head>
 <body>
